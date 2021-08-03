@@ -11,7 +11,6 @@ const Container = styled.div`
 `;
 
 const Crew = ({ credits }) => {
-  console.log(credits.id);
   return (
     <Container>
       {credits &&

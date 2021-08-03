@@ -57,6 +57,8 @@ const Cover = styled.div`
   background-size: cover;
   background-position: center center;
   border-radius: 5px;
+  -webkit-box-shadow: 0px 2px 15px 0px rgba(255, 255, 255, 0.22);
+  box-shadow: 0px 2px 15px 0px rgba(255, 255, 255, 0.22);
   opacity: 0.5;
 `;
 const TagLine = styled.div`
