@@ -1,10 +1,10 @@
 import React from 'react';
-import Router from 'Components/Router';
+import { AppRouter } from 'Components/Router';
 import GlobalStyles from 'Components/GlobalStyles';
 function App() {
   return (
     <>
-      <Router />
+      <AppRouter />
       <GlobalStyles />
     </>
   );
