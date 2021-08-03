@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { IoHome, IoCopySharp } from 'react-icons/io5';
-import Season from './Season';
 
 const Data = styled.div`
   display: flex;
@@ -28,7 +27,13 @@ const Item = styled.span`
   color: #f22b7c;
   font-size: 13px;
   transition: color 0.2s linear;
-
+  display: flex;
+  align-items: center;
+  background: #fbca36;
+  -webkit-box-shadow: 0px 2px 15px 0px rgba(255, 255, 255, 0.22);
+  box-shadow: 0px 2px 15px 0px rgba(255, 255, 255, 0.22);
+  border-radius: 0px 5px 0px;
+  padding: 2px 2px;
   &:hover {
     color: white;
   }
@@ -37,8 +42,10 @@ const Item = styled.span`
 const SLink = styled.a``;
 
 const Divider = styled.span`
+  display: flex;
+  align-items: center;
   color: #fbca36;
-  margin: 0px 3px;
+  margin: 0px 1px;
 `;
 
 const OverView = styled.p`
@@ -53,25 +60,26 @@ const Detail = ({ result, isMovie }) => {
     <Data>
       <Title>{result.title ? result.title : result.name}</Title>
       <ItemContainer>
+        <Item>{result.adult ? '🔞' : 'All'}</Item>
+
+        <Divider>•</Divider>
         <Item>
           {result.release_date
             ? result.release_date.substring(0, 7)
             : result.first_air_date.substring(0, 7)}
         </Item>
-        <Divider>-</Divider>
-        <Item>{result.adult ? '🔞' : '전체관람가'}</Item>
-        <Divider>-</Divider>
+        <Divider>•</Divider>
         <Item>
           {result.genres &&
             result.genres.map((gene, index) =>
               index === result.genres.length - 1 ? gene.name : `${gene.name} / `
             )}
         </Item>
-        <Divider>-</Divider>
+        <Divider>•</Divider>
         <Item>
           {result.runtime ? result.runtime : result.episode_run_time[0]} min
         </Item>
-        <Divider>-</Divider>
+        <Divider>•</Divider>
         <Item>
           {result.imdb_id ? (
             <SLink
@@ -88,7 +96,7 @@ const Detail = ({ result, isMovie }) => {
         </Item>
         {result && result.belongs_to_collection && (
           <>
-            <Divider>-</Divider>
+            <Divider>•</Divider>
             <Item>
               <Link to={`/movie/collection/${result.belongs_to_collection.id}`}>
                 <IoCopySharp />
@@ -98,7 +106,7 @@ const Detail = ({ result, isMovie }) => {
         )}
         {!isMovie && result && result.seasons && (
           <>
-            <Divider>-</Divider>
+            <Divider>•</Divider>
             <Item>
               <Link
                 to={{

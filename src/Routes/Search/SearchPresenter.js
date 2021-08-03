@@ -6,6 +6,7 @@ import Section from 'Components/Section';
 import Message from 'Components/Message';
 import Poster from 'Components/Poster';
 import { IoSearch } from 'react-icons/io5';
+import { Helmet } from 'react-helmet';
 
 const Container = styled.div`
   padding: 20px;
@@ -71,6 +72,9 @@ const SearchPresenter = ({
 }) => {
   return (
     <Container>
+      <Helmet>
+        <title>Search | Komflix</title>
+      </Helmet>
       <SearchBox>
         <Form onSubmit={handleSubmit}>
           <Input

@@ -52,5 +52,8 @@ const Country = ({ country }) => {
   );
 };
 
-Country.propTypes = {};
+Country.propTypes = {
+  iso_3166_1: PropTypes.string,
+  name: PropTypes.string,
+};
 export default Country;

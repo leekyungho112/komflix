@@ -5,6 +5,7 @@ import Loader from 'Components/Loader';
 import Message from 'Components/Message';
 import Poster from 'Components/Poster';
 import HomeButton from 'Components/HomeButton';
+import { Helmet } from 'react-helmet';
 
 const Container = styled.div`
   margin-top: 50px;
@@ -33,10 +34,18 @@ const Collection = styled.div`
 
 const CollectionPresenter = ({ collection, loading, error }) => {
   return loading ? (
-    <Loader />
+    <>
+      <Helmet>
+        <title>Loading | Komflix</title>
+      </Helmet>
+      <Loader />
+    </>
   ) : (
     <>
       <Container>
+        <Helmet>
+          <title>{collection.name} | Komflix</title>
+        </Helmet>
         <CHeader>
           {' '}
           <Title>{collection && collection.name}</Title>

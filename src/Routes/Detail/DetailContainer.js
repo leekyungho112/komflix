@@ -11,7 +11,6 @@ const DetailContainer = ({
 }) => {
   const [result, setResult] = useState([]);
   const [credits, setCredits] = useState([]);
-  const [collection, setCollection] = useState([]);
   const [similar, setSimilar] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -50,7 +49,7 @@ const DetailContainer = ({
       }
     };
     fetchUrl();
-  }, [id, isMovie]);
+  }, [id, isMovie, push]);
 
   return (
     <div>

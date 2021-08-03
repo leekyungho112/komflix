@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Loader from 'Components/Loader';
@@ -8,6 +8,7 @@ import Video from 'Components/Video';
 import Message from 'Components/Message';
 import { IoArrowBackOutline, IoArrowForwardOutline } from 'react-icons/io5';
 import Poster from 'Components/Poster';
+import { Helmet } from 'react-helmet';
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -151,11 +152,19 @@ const DetailPresenter = ({
       setCurrent(current > 0 ? current - 1 : length - 1);
     }
   };
-  console.log(result);
+
   return loading ? (
-    <Loader />
+    <>
+      <Helmet>
+        <title>Loading | Komflix</title>
+      </Helmet>
+      <Loader />
+    </>
   ) : (
     <Container>
+      <Helmet>
+        <title>{result.title ? result.title : result.name} | Komflix</title>
+      </Helmet>
       <DetailContainer>
         {result.videos && result.videos.results[0] ? (
           <Video videoId={result.videos.results[0].key} />

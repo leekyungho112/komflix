@@ -4,6 +4,7 @@ import styled, { keyframes } from 'styled-components';
 import Loader from 'Components/Loader';
 import Message from 'Components/Message';
 import { Link } from 'react-router-dom';
+import Helmet from 'react-helmet';
 import {
   IoInformationCircleOutline,
   IoArrowBackOutline,
@@ -207,70 +208,82 @@ const HomePresenter = ({ trend, error, loading }) => {
     }
   };
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setCurrent(current === length - 1 ? 0 : current + 1);
-  //   }, 5000);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurrent(current === length - 1 ? 0 : current + 1);
+    }, 5000);
 
-  //   return () => clearTimeout(timer);
-  // }, [current, length]);
+    return () => clearTimeout(timer);
+  }, [current, length]);
 
-  return loading ? (
-    <Loader />
-  ) : (
-    <Container>
-      <PrevButton sw={40} onClick={() => handleSlide('left')}>
-        <IoArrowBackOutline />
-      </PrevButton>
+  return (
+    <>
+      <Helmet>
+        <title>Home | Komflilx</title>
+      </Helmet>
+      {loading ? (
+        <Loader />
+      ) : (
+        <Container>
+          <Helmet>
+            <title>Home | Komflilx</title>
+          </Helmet>
+          <PrevButton sw={40} onClick={() => handleSlide('left')}>
+            <IoArrowBackOutline />
+          </PrevButton>
 
-      <Track ref={slideRef} current={current}>
-        <MainSlide>
-          {trend && trend.length > 0 && (
-            <>
-              {trend.map((item, index) => (
-                <MainContent
-                  className={current === index ? 'active' : 'slide'}
-                  key={index}
-                >
-                  <MainImage
-                    bgurl={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}
-                  >
-                    {current === index && (
-                      <MainPost className={current === index && 'current'}>
-                        <TopNumber>
-                          <span>{index + 1} TOP</span>
-                        </TopNumber>
-                        <Title>{item.title ? item.title : item.name}</Title>
-                        <Category>
-                          <span>{item.media_type}</span>
-                        </Category>
-                        <Overview>{item.overview.substring(0, 40)}...</Overview>
-                        <Link
-                          to={
-                            item.media_type === 'movie'
-                              ? `/movie/${item.id}`
-                              : `/tv/${item.id}`
-                          }
-                        >
-                          <Button>
-                            <IoInformationCircleOutline />
-                            <span>상세정보</span>
-                          </Button>{' '}
-                        </Link>
-                      </MainPost>
-                    )}
-                  </MainImage>
-                </MainContent>
-              ))}
-            </>
-          )}
-        </MainSlide>
-        {error && <Message color="#e74c3c" text={error} />}
-      </Track>
-      <NextButton sw={40} onClick={() => handleSlide('right')}>
-        <IoArrowForwardOutline />
-      </NextButton>
-    </Container>
+          <Track ref={slideRef} current={current}>
+            <MainSlide>
+              {trend && trend.length > 0 && (
+                <>
+                  {trend.map((item, index) => (
+                    <MainContent
+                      className={current === index ? 'active' : 'slide'}
+                      key={index}
+                    >
+                      <MainImage
+                        bgurl={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}
+                      >
+                        {current === index && (
+                          <MainPost className={current === index && 'current'}>
+                            <TopNumber>
+                              <span>{index + 1} TOP</span>
+                            </TopNumber>
+                            <Title>{item.title ? item.title : item.name}</Title>
+                            <Category>
+                              <span>{item.media_type}</span>
+                            </Category>
+                            <Overview>
+                              {item.overview.substring(0, 40)}...
+                            </Overview>
+                            <Link
+                              to={
+                                item.media_type === 'movie'
+                                  ? `/movie/${item.id}`
+                                  : `/tv/${item.id}`
+                              }
+                            >
+                              <Button>
+                                <IoInformationCircleOutline />
+                                <span>상세정보</span>
+                              </Button>{' '}
+                            </Link>
+                          </MainPost>
+                        )}
+                      </MainImage>
+                    </MainContent>
+                  ))}
+                </>
+              )}
+            </MainSlide>
+            {error && <Message color="#e74c3c" text={error} />}
+          </Track>
+          <NextButton sw={40} onClick={() => handleSlide('right')}>
+            <IoArrowForwardOutline />
+          </NextButton>
+        </Container>
+      )}
+    </>
   );
 };
 
