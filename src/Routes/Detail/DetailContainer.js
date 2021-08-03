@@ -22,6 +22,7 @@ const DetailContainer = ({
         return push('/');
       }
       try {
+        setLoading(true);
         if (isMovie) {
           const { data } = await moviesApi.movieDetail(numberId);
           const { data: credits } = await moviesApi.credits(numberId);
@@ -42,6 +43,7 @@ const DetailContainer = ({
           setCredits(credits);
           setSimilar(similar);
         }
+        setLoading(false);
       } catch {
         setError('정보를 찾을수 없습니다.');
       } finally {

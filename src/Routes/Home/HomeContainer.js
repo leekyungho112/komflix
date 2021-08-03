@@ -10,10 +10,12 @@ const HomeContainer = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const {
           data: { results },
         } = await trendApi.treding();
         setTred(results);
+        setLoading(false);
       } catch {
         setError('영화 정보를 찾을수 없습니다.');
       } finally {
@@ -23,6 +25,7 @@ const HomeContainer = () => {
     fetchData();
     return () => {
       fetchData();
+      setLoading(false);
     };
   }, []);
 

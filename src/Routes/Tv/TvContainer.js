@@ -12,6 +12,7 @@ const TvContainer = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const {
           data: { results: topRated },
         } = await tvApi.topRated();
@@ -25,6 +26,7 @@ const TvContainer = () => {
         setTopRated(topRated);
         setPopular(popular);
         setAiringToday(airingToday);
+        setLoading(false);
       } catch {
         setError('Tv목록을 찾을수 없습니다.');
       } finally {
@@ -34,6 +36,7 @@ const TvContainer = () => {
     fetchData();
     return () => {
       fetchData();
+      setLoading(false);
     };
   }, []);
 

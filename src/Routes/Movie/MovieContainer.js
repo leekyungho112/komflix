@@ -12,6 +12,7 @@ const MovieContainer = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const {
           data: { results: nowPlaying },
         } = await moviesApi.nowPlaying();
@@ -25,6 +26,7 @@ const MovieContainer = () => {
         setNowPlaying(nowPlaying);
         setUpcoming(upcoming);
         setPopular(popular);
+        setLoading(false);
       } catch {
         setError('영화 정보를 찾을수 없습니다.');
       } finally {
@@ -34,6 +36,7 @@ const MovieContainer = () => {
     fetchData();
     return () => {
       fetchData();
+      setLoading(false);
     };
   }, []);
 
