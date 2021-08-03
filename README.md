@@ -66,4 +66,4 @@ Netflix Clone
 
 # Preview
 
-Hompage: [👉Komflix]("https://kkomflix.netlify.app/")
+Hompage: [👉Komflix](https://kkomflix.netlify.app/)
